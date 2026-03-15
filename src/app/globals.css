@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+/* Fonts */
+@font-face {
+  font-family: "ClashGrotesk";
+  src:
+    url("/fonts/ClashGrotesk/clashgrotesk-regular-webfont.woff2")
+      format("woff2"),
+    url("/fonts/ClashGrotesk/clashgrotesk-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashGrotesk";
+  src:
+    url("/fonts/ClashGrotesk/clashgrotesk-medium-webfont.woff2")
+      format("woff2"),
+    url("/fonts/ClashGrotesk/clashgrotesk-medium-webfont.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ClashGrotesk";
+  src:
+    url("/fonts/ClashGrotesk/clashgrotesk-bold-webfont.woff2") format("woff2"),
+    url("/fonts/ClashGrotesk/clashgrotesk-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/satoshi/Satoshi-Light.woff2") format("woff2"),
+    url("/fonts/satoshi/Satoshi-Light.woff") format("woff");
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/satoshi/Satoshi-Regular.woff2") format("woff2"),
+    url("/fonts/satoshi/Satoshi-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/satoshi/Satoshi-Medium.woff2") format("woff2"),
+    url("/fonts/satoshi/Satoshi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/satoshi/Satoshi-Bold.woff2") format("woff2"),
+    url("/fonts/satoshi/Satoshi-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/satoshi/Satoshi-Black.woff2") format("woff2"),
+    url("/fonts/satoshi/Satoshi-Black.woff") format("woff");
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-neutral-950: #1d1c1b;
+  --color-neutral-900: #302f2e;
+  --color-neutral-700: #595958;
+  --color-neutral-600: #747473;
+  --color-neutral-500: #a09f9f;
+  --color-neutral-200: #bfbfbe;
+  --color-neutral-100: #eaeaea;
+  --color-neutral-0: #ffffff;
+
+  --color-brand-950: #247aed;
+  --color-brand-925: #3b87ec;
+  --color-brand-900: #5394ec;
+  --color-brand-800: #6aa1eb;
+  --color-brand-700: #82afec;
+  --color-brand-600: #99bdec;
+  --color-brand-500: #b1caec;
+  --color-brand-300: #c9dbec;
+  --color-brand-100: #f2f8ff;
+
+  --color-success-600: #008f5d;
+  --color-success-700: #008255;
+  --color-success-800: #006642;
+
+  --color-warning-600: #f68523;
+  --color-warning-700: #e07920;
+
+  --color-danger-600: #ea3729;
+  --color-danger-700: #d53225;
+
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-grotesk: "ClashGrotesk", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  font-family: var(--font-satoshi);
+  color: #302f2e;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #bfbfbe;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a09f9f;
+}
+
+/* Code blocks */
+pre {
+  background-color: #1d1c1b !important;
+  color: #eaeaea;
+  border-radius: 12px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+code {
+  font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  background-color: #f2f8ff;
+  color: #247aed;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.85em;
+}
+
+/* Markdown content styling */
+.prose h1 {
+  font-family: var(--font-satoshi);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 2.125rem;
+  letter-spacing: -0.035rem;
+  color: #302f2e;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  font-family: var(--font-satoshi);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+  letter-spacing: -0.0275rem;
+  color: #302f2e;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.prose h3 {
+  font-family: var(--font-satoshi);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: #302f2e;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose h4 {
+  font-family: var(--font-satoshi);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #302f2e;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose p {
+  font-family: var(--font-satoshi);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  color: #595958;
+  margin-bottom: 0.75rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  font-family: var(--font-satoshi);
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: #595958;
+  margin-bottom: 0.25rem;
+}
+
+.prose li::marker {
+  color: #247aed;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: #302f2e;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+
+.prose th {
+  background-color: #f2f8ff;
+  color: #302f2e;
+  font-weight: 500;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #c9dbec;
+}
+
+.prose td {
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+  color: #595958;
+}
+
+.prose tr:hover td {
+  background-color: #f2f8ff;
+}
+
+.prose blockquote {
+  border-left: 3px solid #247aed;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #595958;
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 2rem 0;
+}
+
+/* Method badges */
+.method-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: "SF Mono", monospace;
+  letter-spacing: 0.025em;
+}
+.method-get {
+  background-color: #e6f4ef;
+  color: #008f5d;
+}
+.method-post {
+  background-color: #f2f8ff;
+  color: #247aed;
+}
+.method-put,
+.method-patch {
+  background-color: #fef3e9;
+  color: #f68523;
+}
+.method-delete {
+  background-color: #fdebea;
+  color: #ea3729;
+}
