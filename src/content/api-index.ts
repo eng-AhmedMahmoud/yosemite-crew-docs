@@ -13,7 +13,7 @@ API docs are split by router. Base paths reflect the registration in \`apps/back
 | [Document](/docs/api-document) | File upload, creation, retrieval | 20 |
 | [Form](/docs/api-form) | Digital forms, submissions, SOAP notes | 17 |
 | [Inventory](/docs/api-inventory) | Items, batches, stock, vendors, alerts | 33 |
-| [Invoice](/docs/api-invoice) | Billing, payment intents, checkout | 10 |
+| [Invoice](/docs/api-invoice) | Billing, payment intents, checkout, collection methods | 11 |
 | [Organization](/docs/api-organization) | Clinic management, search, invites | 10 |
 | [Task](/docs/api-task) | Task management, templates, library | 16 |
 | [User](/docs/api-user) | User retrieval and name updates | 2 |
@@ -48,6 +48,11 @@ API docs are split by router. Base paths reflect the registration in \`apps/back
 | Service | Veterinary services and slots | 4 |
 | Speciality | Veterinary specialties | 4 |
 | User Organization | User-org role mappings | 4 |
+| Integration | Third-party integration management (IDEXX, Merck) | 6 |
+| Lab Orders | IDEXX lab order creation and management | 6 |
+| Lab Census | IDEXX patient census and device management | 4 |
+| Lab Results | Lab result retrieval and PDF downloads | 5 |
+| Merck | Merck Vet Manual search with timezone routing | 1 |
 | User Profile | Profile management and pictures | 5 |
 
 ## Authentication Patterns

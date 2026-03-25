@@ -6,7 +6,8 @@ export const content = `
 - **Git** — version control
 - **Node.js** — v20 or later recommended
 - **pnpm** — package manager (v8.15+)
-- **MongoDB** — for the backend database
+- **PostgreSQL** — primary backend database
+- **MongoDB** — legacy database (still required during migration)
 - **Redis** — for caching and job queues
 
 ## Clone the Repository
@@ -28,6 +29,16 @@ cd Yosemite-Crew
 \`\`\`bash
 pnpm install
 \`\`\`
+
+## Database Setup
+
+\`\`\`bash
+# Run Prisma migrations for PostgreSQL
+cd apps/backend
+npx prisma migrate dev
+\`\`\`
+
+Set \`READ_FROM_POSTGRES=true\` in \`apps/backend/.env\` to enable reading from PostgreSQL (recommended for new setups).
 
 ## Run the Applications
 

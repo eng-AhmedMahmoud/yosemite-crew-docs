@@ -70,4 +70,12 @@ Get a specific invoice by ID.
 - **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`invoiceId\`
 - **Controller:** \`InvoiceController.getById\`
+
+### PATCH /:invoiceId/payment-collection-method
+Update the payment collection method for an invoice.
+- **Auth:** \`authorizeCognito\`
+- **Params:** \`invoiceId\`
+- **Body:** \`{ paymentCollectionMethod: "PAYMENT_INTENT" | "PAYMENT_LINK" | "PAYMENT_AT_CLINIC" }\`
+- **Controller:** \`InvoiceController.updatePaymentCollectionMethod\`
+- **Response:** \`200\` — Updated invoice object
 `;

@@ -34,8 +34,10 @@ export const content = `
 |-----------|---------|---------|
 | Express | HTTP framework | 4.21.2 |
 | Node.js | Runtime (ESM modules) | 22 |
-| MongoDB | Primary database | 8.12.2 (driver) |
-| Mongoose | ODM for MongoDB | — |
+| PostgreSQL | Primary database (via Prisma ORM) | — |
+| Prisma | Type-safe ORM for PostgreSQL | — |
+| MongoDB | Legacy database (migration in progress) | 8.12.2 (driver) |
+| Mongoose | ODM for MongoDB (legacy) | — |
 | Redis / BullMQ | Job queue and caching | 5.65.1 |
 | Socket.io | Real-time WebSocket events | 4.8.1 |
 | Stripe | Payment processing | 20.0.0 |
@@ -84,5 +86,7 @@ export const content = `
 | GitHub Actions | CI/CD pipelines |
 | SonarCloud | Code quality and coverage analysis |
 | CodeQL | Security vulnerability scanning |
+| IDEXX | Veterinary laboratory diagnostics integration |
+| Merck Vet Manual | Clinical reference and search integration |
 | Documenso | Digital document signing |
 `;

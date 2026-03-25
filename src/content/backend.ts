@@ -13,7 +13,8 @@ pnpm run dev --filter api
 ## Tech Stack
 
 - **Express 4.21** — HTTP framework
-- **MongoDB 8.12** — Primary database (via Mongoose)
+- **PostgreSQL** — Primary database (via Prisma ORM)
+- **MongoDB 8.12** — Legacy database (migration in progress, via Mongoose)
 - **Redis / BullMQ 5.65** — Job queue and caching
 - **Socket.io 4.8** — Real-time WebSocket events
 - **Stripe 20.0** — Payment processing
@@ -32,7 +33,8 @@ apps/backend/src/
 ├── routers/           # 37 Express route handlers
 ├── controllers/       # Business logic
 ├── services/          # Service layer
-├── models/            # Mongoose schemas
+├── models/            # Mongoose schemas (legacy)
+├── prisma/            # Prisma schema and migrations (PostgreSQL)
 ├── middleware/         # Auth, RBAC, validation
 │   ├── authorizeCognito.ts      # PMS web auth
 │   ├── authorizeCognitoMobile.ts # Mobile app auth
@@ -59,6 +61,28 @@ authorizeCognito → withOrgPermissions → requirePermission
 \`\`\`
 
 This chain validates the user's identity, loads their organization permissions, and checks for the required permission level.
+
+## Database Architecture
+
+The backend is actively migrating from MongoDB to PostgreSQL. During the transition, a **read-switch** pattern allows services to read from either database based on the \`READ_FROM_POSTGRES\` environment variable:
+
+\`\`\`typescript
+// config/read-switch.ts
+export const isReadFromPostgres = (): boolean =>
+  process.env.READ_FROM_POSTGRES === "true";
+\`\`\`
+
+- **PostgreSQL (Prisma)** — New primary database. All new features (IDEXX integration, lab orders, Merck integration) are Postgres-only.
+- **MongoDB (Mongoose)** — Legacy database. Existing services conditionally read from MongoDB when \`READ_FROM_POSTGRES\` is not enabled.
+- **Dual-write** — Write operations target both databases during the migration period to ensure data consistency.
+
+## Third-Party Integrations
+
+### IDEXX Integration
+Full integration with IDEXX veterinary laboratory services including device management, census operations, lab order creation, and result retrieval. See the [API Index](/docs/api-index) for endpoint details.
+
+### Merck Vet Manual
+Integration with Merck Veterinary Manual for clinical reference searches. Supports timezone-aware API routing (US/Canada vs. global endpoints) and automatic HTML filtering for clean results.
 
 ## Animal Health Custom FHIR
 
