@@ -30,7 +30,7 @@ pnpm run dev --filter api
 
 \`\`\`
 apps/backend/src/
-├── routers/           # 37 Express route handlers
+├── routers/           # 41 Express route handlers
 ├── controllers/       # Business logic
 ├── services/          # Service layer
 ├── models/            # Mongoose schemas (legacy)
@@ -72,7 +72,7 @@ export const isReadFromPostgres = (): boolean =>
   process.env.READ_FROM_POSTGRES === "true";
 \`\`\`
 
-- **PostgreSQL (Prisma)** — New primary database. All new features (IDEXX integration, lab orders, Merck integration) are Postgres-only.
+- **PostgreSQL (Prisma)** — New primary database. All new features (IDEXX integration, lab orders, Merck integration, codes) are Postgres-only.
 - **MongoDB (Mongoose)** — Legacy database. Existing services conditionally read from MongoDB when \`READ_FROM_POSTGRES\` is not enabled.
 - **Dual-write** — Write operations target both databases during the migration period to ensure data consistency.
 
@@ -82,11 +82,11 @@ export const isReadFromPostgres = (): boolean =>
 Full integration with IDEXX veterinary laboratory services including device management, census operations, lab order creation, and result retrieval. See the [API Index](/docs/api-index) for endpoint details.
 
 ### Merck Vet Manual
-Integration with Merck Veterinary Manual for clinical reference searches. Supports timezone-aware API routing (US/Canada vs. global endpoints) and automatic HTML filtering for clean results.
+Integration with Merck Veterinary Manual for clinical reference searches via the Knowledge router (\`/v1/knowledge\`). Supports timezone-aware API routing (US/Canada vs. global endpoints), automatic HTML filtering, and rate limiting (120 req/15 min per org:user).
 
 ## Animal Health Custom FHIR
 
-The backend models animal health workflows using FHIR resources plus custom code systems and extensions.
+The backend models animal health workflows using FHIR resources plus custom code systems and extensions. The Code router (\`/v1/codes\`) exposes code system entries and value-set mappings used across the platform.
 
 ### Core Mappings (Domain → FHIR)
 
@@ -113,7 +113,7 @@ Each DTO file in \`packages/types/src/dto\` provides:
 
 ## API Documentation
 
-The API has **37 routers** covering all platform functionality. See the [API Index](/docs/api-index) for the complete list, or jump to specific APIs:
+The API has **41 routers** covering all platform functionality. See the [API Index](/docs/api-index) for the complete list, or jump to specific APIs:
 
 - [Appointment API](/docs/api-appointment) — Scheduling and management
 - [Chat API](/docs/api-chat) — Real-time messaging

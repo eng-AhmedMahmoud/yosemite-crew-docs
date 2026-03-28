@@ -34,6 +34,16 @@ Manages practitioner availability slots for appointment scheduling.
 Manages recurring base availability templates for practitioners.
 - **Endpoints:** 4
 - **Auth:** \`authorizeCognito\` + RBAC
+- **Note:** Router file exists (\`base-availability.router.ts\`) but is not currently registered in \`routers/index.ts\`.
+
+## Code
+Provides FHIR code system entries and value-set mappings used across the platform (e.g. species, breeds, observation codes).
+- **Base path:** \`/v1/codes\`
+- **Endpoints:** 2
+- **Auth:** \`authorizeCognito\`
+- **Key routes:**
+  - \`GET /v1/codes/entries\` — List code system entries
+  - \`GET /v1/codes/mappings\` — List value-set mappings
 
 ## Companion Organisation
 Links companions (pets) to organisations and manages the relationship.
@@ -52,8 +62,17 @@ Manages co-parent invitation flows for shared companion ownership.
 
 ## Dashboard
 Provides aggregated dashboard data for PMS users including metrics and statistics. Supports both PostgreSQL and MongoDB backends via the read-switch pattern.
-- **Endpoints:** 3
-- **Auth:** \`authorizeCognito\` + RBAC
+- **Base path:** \`/v1/dashboard\`
+- **Endpoints:** 7
+- **Auth:** \`authorizeCognito\` + RBAC (\`analytics:view:any\`)
+- **Key routes:**
+  - \`GET /v1/dashboard/summary/:organisationId\` — Aggregated summary metrics
+  - \`GET /v1/dashboard/appointments/:organisationId/trend\` — Appointment trend data
+  - \`GET /v1/dashboard/revenue/:organisationId/trend\` — Revenue trend data
+  - \`GET /v1/dashboard/appointment-leaders/:organisationId\` — Top practitioners by appointments
+  - \`GET /v1/dashboard/revenue-leaders/:organisationId\` — Top practitioners by revenue
+  - \`GET /v1/dashboard/inventory/:organisationId/turnover\` — Inventory turnover metrics
+  - \`GET /v1/dashboard/inventory/:organisationId/products\` — Product-level turnover
 
 ## Device Token
 Manages device tokens for push notification delivery.
@@ -127,55 +146,66 @@ Manages the relationship between users and their organisations, including roles 
 
 ## Integration Management
 Manages third-party integration accounts (IDEXX, Merck) for organisations, including credential storage, validation, and enable/disable flows.
+- **Base path:** \`/v1/integration\`
 - **Endpoints:** 6
 - **Auth:** \`authorizeCognito\` + RBAC
 - **Key routes:**
-  - \`GET /integrations/:organisationId\` — List all integrations
-  - \`GET /integrations/:organisationId/:provider\` — Get integration details
-  - \`POST /integrations/:organisationId/:provider/validate\` — Validate credentials
-  - \`POST /integrations/:organisationId/:provider/enable\` — Enable integration
-  - \`POST /integrations/:organisationId/:provider/disable\` — Disable integration
-  - \`PATCH /integrations/:organisationId/:provider\` — Update credentials
+  - \`GET /v1/integration/:organisationId\` — List all integrations
+  - \`GET /v1/integration/:organisationId/:provider\` — Get integration details
+  - \`POST /v1/integration/:organisationId/:provider/validate\` — Validate credentials
+  - \`POST /v1/integration/:organisationId/:provider/enable\` — Enable integration
+  - \`POST /v1/integration/:organisationId/:provider/disable\` — Disable integration
+  - \`PATCH /v1/integration/:organisationId/:provider\` — Update credentials
 
 ## Lab Orders (IDEXX)
-Manages IDEXX laboratory test orders including creation, updates, cancellation, and provider test catalog lookups.
-- **Endpoints:** 6
-- **Auth:** \`authorizeCognito\` + RBAC
+Manages IDEXX laboratory test orders including creation, updates, cancellation, and provider test catalog lookups. Both lab orders and lab census share the \`/v1/labs\` base path via \`lab-order.router.ts\`.
+- **Base path:** \`/v1/labs\`
+- **Endpoints:** 8 (order-specific)
+- **Auth:** \`authorizeCognito\` + RBAC (\`labs:view:any\` / \`labs:edit:any\`)
 - **Key routes:**
-  - \`POST /lab-orders/list/:provider/:organisationId\` — List orders (filter by appointment, companion, status)
-  - \`POST /lab-orders/provider-tests/:provider/:organisationId\` — Search provider test catalog
-  - \`POST /lab-orders/create/:provider/:organisationId\` — Create lab order
-  - \`GET /lab-orders/:provider/:organisationId/:orderId\` — Get order details
-  - \`PATCH /lab-orders/:provider/:organisationId/:orderId\` — Update order
-  - \`DELETE /lab-orders/:provider/:organisationId/:orderId\` — Cancel order
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/orders\` — List orders
+  - \`POST /v1/labs/pms/organisation/:organisationId/:provider/orders\` — List orders (POST) / Create order
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/tests\` — Search provider test catalog
+  - \`POST /v1/labs/pms/organisation/:organisationId/:provider/tests\` — Search provider test catalog (POST)
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/orders/:idexxOrderId\` — Get order details
+  - \`PUT /v1/labs/pms/organisation/:organisationId/:provider/orders/:idexxOrderId\` — Update order
+  - \`DELETE /v1/labs/pms/organisation/:organisationId/:provider/orders/:idexxOrderId\` — Cancel order
 
 ## Lab Census (IDEXX)
-Manages IDEXX In-Clinic (IVLS) device census for patient identification and sample tracking.
-- **Endpoints:** 4
-- **Auth:** \`authorizeCognito\` + RBAC
+Manages IDEXX In-Clinic (IVLS) device census for patient identification and sample tracking. Registered in the same \`lab-order.router.ts\` under the \`/v1/labs\` base path.
+- **Base path:** \`/v1/labs\`
+- **Endpoints:** 9
+- **Auth:** \`authorizeCognito\` + RBAC (\`labs:view:any\` / \`labs:edit:any\`)
 - **Key routes:**
-  - \`GET /lab-census/list-ivls-devices/:provider/:organisationId\` — List IVLS devices
-  - \`GET /lab-census/list-census/:provider/:organisationId\` — List census entries
-  - \`POST /lab-census/add-census-patient/:provider/:organisationId\` — Add patient to census
-  - \`POST /lab-census/census-patient/:provider/:organisationId\` — Get patient from census
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/ivls/devices\` — List IVLS devices
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/census\` — List census entries
+  - \`POST /v1/labs/pms/organisation/:organisationId/:provider/census\` — Add patient to census
+  - \`DELETE /v1/labs/pms/organisation/:organisationId/:provider/census\` — Delete all census entries
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/census/:censusId\` — Get census by ID
+  - \`DELETE /v1/labs/pms/organisation/:organisationId/:provider/census/:censusId\` — Delete census by ID
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/census/patient/:patientId\` — Get patient from census
+  - \`POST /v1/labs/pms/organisation/:organisationId/:provider/census/patient\` — Get patient from census (POST)
+  - \`DELETE /v1/labs/pms/organisation/:organisationId/:provider/census/patient/:patientId\` — Remove patient from census
 
 ## Lab Results (IDEXX)
 Retrieves lab test results and downloadable reports from IDEXX.
+- **Base path:** \`/v1/labs\`
 - **Endpoints:** 5
-- **Auth:** \`authorizeCognito\` + RBAC
+- **Auth:** \`authorizeCognito\` + RBAC (\`labs:view:any\`)
 - **Key routes:**
-  - \`GET /lab-results/list/:provider/:organisationId\` — List results (filter by order, companion)
-  - \`GET /lab-results/get/:provider/:resultId\` — Get result details
-  - \`GET /lab-results/pdf/:provider/:resultId\` — Download result PDF
-  - \`GET /lab-results/notifications-pdf/:provider/:resultId\` — Download notifications PDF
-  - \`GET /lab-results/search/:provider\` — Search results
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/results\` — List results
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/results/search\` — Search results
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/results/:resultId\` — Get result details
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/results/:resultId/pdf\` — Download result PDF
+  - \`GET /v1/labs/pms/organisation/:organisationId/:provider/results/:resultId/notifications/pdf\` — Download notifications PDF
 
-## Merck Vet Manual
-Provides clinical reference search via the Merck Veterinary Manual API with timezone-aware endpoint routing (US/Canada vs. global) and automatic HTML response filtering.
+## Knowledge / Merck Vet Manual
+Provides clinical reference search via the Merck Veterinary Manual API with timezone-aware endpoint routing (US/Canada vs. global) and automatic HTML response filtering. Rate-limited to 120 requests per 15 minutes per org:user pair.
+- **Base path:** \`/v1/knowledge\`
 - **Endpoints:** 1
-- **Auth:** \`authorizeCognito\`
+- **Auth:** \`authorizeCognito\` + RBAC (\`integrations:view:any\`)
 - **Key routes:**
-  - \`GET /merck/search/:organisationId\` — Search manuals (params: q, audience, language, media, timezone, code, codeSystem)
+  - \`GET /v1/knowledge/pms/organisation/:organisationId/merck/manuals/search\` — Search manuals (params: q, audience, language, media, timezone, code, codeSystem)
 
 ## User Profile
 Manages detailed user profile information beyond basic account data.
