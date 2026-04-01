@@ -1,18 +1,29 @@
 export const content = `
 # User API
 
-Manages basic user profile operations including retrieval and name updates.
+Manages user accounts including creation, retrieval, deletion, and name updates.
 
 ## Endpoints
 
+### POST /
+Create a new user.
+- **Auth:** \`authorizeCognito\`
+- **Controller:** \`UserController.create\`
+- **Response:** \`201\` — \`{ data: User }\`
+
 ### GET /:id
 Get a user by ID.
-- **Auth:** \`authorizeCognito\`
 - **Params:** \`id\` — the user ID
 - **Controller:** \`UserController.getById\`
 - **Response:** \`200\` — \`{ data: User }\`
 
-### PATCH /name
+### DELETE /:id
+Delete a user by ID.
+- **Auth:** \`authorizeCognito\`
+- **Params:** \`id\` — the user ID
+- **Controller:** \`UserController.deleteById\`
+
+### PATCH /update-name
 Update the authenticated user's name.
 - **Auth:** \`authorizeCognito\`
 - **Body:** \`{ firstName, lastName }\`

@@ -69,37 +69,37 @@ Submit a form response from the admin panel.
 
 ## Appointment Endpoints
 
-### GET /appointments/:appointmentId/soap-notes
+### POST /appointments/:appointmentId/soap-notes
 Get SOAP notes for an appointment.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("prescription:view:any")\`
 - **Params:** \`appointmentId\`
-- **Query:** \`latestOnly\` — boolean, return only the latest SOAP note
-- **Controller:** \`FormController.getSoapNotes\`
+- **Controller:** \`FormController.getSOAPNotesByAppointment\`
 
-### GET /appointments/:appointmentId/forms
+### POST /appointments/:appointmentId/forms
 Get forms associated with an appointment.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("forms:view:any")\`
 - **Params:** \`appointmentId\`
-- **Query:** \`isPMS\` — boolean, \`serviceId\`, \`species\`
-- **Controller:** \`FormController.getAppointmentForms\`
+- **Controller:** \`FormController.getFormsForAppointment\`
 
 ---
 
 ## Signing Endpoints
 
 ### POST /form-submissions/:submissionId/sign
-Sign a form submission.
+Start the signing process for a form submission.
 - **Auth:** \`authorizeCognito\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("forms:edit:any")\`
 - **Params:** \`submissionId\`
-- **Controller:** \`FormController.signSubmission\`
+- **Controller:** \`FormSigningController.startSigning\`
 
 ### GET /form-submissions/:submissionId/signed-document
 Get the signed document for a submission.
 - **Auth:** \`authorizeCognito\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("forms:view:any")\`
 - **Params:** \`submissionId\`
-- **Controller:** \`FormController.getSignedDocument\`
+- **Controller:** \`FormSigningController.getSignedDocument\`
 
 ---
 
@@ -113,6 +113,13 @@ Get a form for public submission (no auth required).
 ---
 
 ## Mobile Endpoints
+
+### POST /mobile/forms/:formId/submit
+Submit a form from the mobile app.
+- **Auth:** \`authorizeCognitoMobile\`
+- **Params:** \`formId\`
+- **Body:** Form submission data
+- **Controller:** \`FormController.submitForm\`
 
 ### GET /mobile/submissions/:formId
 Get submissions for a specific form.
@@ -133,17 +140,17 @@ Get the consent form for a specific service.
 - **Query:** \`species\`
 - **Controller:** \`FormController.getConsentForm\`
 
-### GET /mobile/appointments/:appointmentId/soap-notes
+### POST /mobile/appointments/:appointmentId/soap-notes
 Get SOAP notes for an appointment from mobile.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`appointmentId\`
-- **Controller:** \`FormController.getMobileSoapNotes\`
+- **Controller:** \`FormController.getSOAPNotesByAppointment\`
 
-### GET /mobile/appointments/:appointmentId/forms
+### POST /mobile/appointments/:appointmentId/forms
 Get forms associated with an appointment from mobile.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`appointmentId\`
-- **Controller:** \`FormController.getMobileAppointmentForms\`
+- **Controller:** \`FormController.getFormsForAppointment\`
 
 ### GET /mobile/form-submissions/:submissionId/pdf
 Download a form submission as PDF.
@@ -155,5 +162,5 @@ Download a form submission as PDF.
 Sign a form submission from mobile.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`submissionId\`
-- **Controller:** \`FormController.signSubmissionMobile\`
+- **Controller:** \`FormSigningController.startSigningMobile\`
 `;

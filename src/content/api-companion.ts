@@ -18,6 +18,12 @@ Get companion details by ID (mobile).
 - **Controller:** \`CompanionController.getCompanionById\`
 
 ### PUT /:id
+Update a companion's details from the mobile app.
+- **Auth:** \`authorizeCognitoMobile\`
+- **Params:** \`id\`
+- **Controller:** \`CompanionController.updateCompanion\`
+
+### DELETE /:id
 Delete a companion (soft delete).
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`id\`

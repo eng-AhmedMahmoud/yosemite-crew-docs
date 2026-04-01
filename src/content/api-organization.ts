@@ -6,60 +6,73 @@ Manages organizations (veterinary businesses), nearby search, logos, specialties
 ## Public / Mobile Endpoints
 
 ### POST /check
-Search for nearby organizations (public endpoint).
-- **Query:** \`lat\` — latitude, \`lng\` — longitude, \`radius\` — search radius, \`page\`, \`limit\`
-- **Controller:** \`OrganizationController.nearbySearch\`
+Check whether an organisation is a PMS organisation.
+- **Controller:** \`OrganizationController.checkIsPMSOrganistaion\`
+
+### GET /getNearby
+Get nearby organizations (public, paginated).
+- **Query:** \`lat\`, \`lng\`, \`radius\`, \`page\`, \`limit\`
+- **Controller:** \`OrganizationController.getNearbyPaginated\`
 
 ### GET /mobile/getNearby
 Get nearby organizations for the authenticated mobile user.
 - **Auth:** \`authorizeCognitoMobile\`
-- **Query:** \`lat\` — latitude, \`lng\` — longitude, \`radius\` — search radius, \`page\`, \`limit\`
-- **Controller:** \`OrganizationController.getNearby\`
+- **Query:** \`lat\`, \`lng\`, \`radius\`, \`page\`, \`limit\`
+- **Controller:** \`OrganizationController.getNearbyPaginated\`
 
 ### POST /logo/presigned-url
 Get a pre-signed URL for uploading an organization logo.
-- **Auth:** \`authorizeCognito\`
 - **Body:** \`{ mimeType }\`
 - **Controller:** \`OrganizationController.getLogoUploadUrl\`
 - **Response:** \`200\` — \`{ url, key }\`
+
+### POST /logo/presigned-url/:orgId
+Get a pre-signed URL for uploading a logo for a specific organization.
+- **Params:** \`orgId\`
+- **Controller:** \`OrganizationController.getLogoUploadUrl\`
 
 ---
 
 ## PMS Endpoints
 
 ### POST /
-List all businesses (organizations) for the authenticated user.
+Onboard a new business (organisation).
 - **Auth:** \`authorizeCognito\`
-- **Controller:** \`OrganizationController.listAll\`
+- **Controller:** \`OrganizationController.onboardBusiness\`
+
+### GET /
+List all businesses for the authenticated user.
+- **Auth:** \`authorizeCognito\`
+- **Controller:** \`OrganizationController.getAllBusinesses\`
 
 ### GET /:organizationId
 Get an organization by ID.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("teams:view:any")\`
 - **Params:** \`organizationId\`
-- **Controller:** \`OrganizationController.getById\`
+- **Controller:** \`OrganizationController.getBusinessById\`
 
 ### PUT /:organizationId
 Update an organization.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("teams:edit:any")\`
 - **Params:** \`organizationId\`
 - **Body:** Organization fields to update
-- **Controller:** \`OrganizationController.update\`
+- **Controller:** \`OrganizationController.updateBusinessById\`
 
 ### DELETE /:organizationId
-Delete an organization.
+Delete an organization (owner only).
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("org:delete")\`
 - **Params:** \`organizationId\`
-- **Controller:** \`OrganizationController.delete\`
+- **Controller:** \`OrganizationController.deleteBusinessById\`
 
 ### GET /:organizationId/specality
 List specialties for an organization.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("specialities:view:any")\`
 - **Params:** \`organizationId\`
-- **Controller:** \`OrganizationController.listSpecialties\`
+- **Controller:** \`SpecialityController.getAllByOrganizationId\`
 
 ---
 
@@ -71,13 +84,13 @@ Create a new team member invite for an organization.
 - **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`organisationId\`
 - **Body:** \`{ email, role, permissions }\`
-- **Controller:** \`OrganizationController.createInvite\`
+- **Controller:** \`OrganisationInviteController.createInvite\`
 - **Response:** \`201\` — \`{ data, message }\`
 
 ### GET /:organisationId/invites
 List all pending invites for an organization.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("teams:view:any")\`
 - **Params:** \`organisationId\`
-- **Controller:** \`OrganizationController.listInvites\`
+- **Controller:** \`OrganisationInviteController.listOrganisationInvites\`
 `;

@@ -5,23 +5,23 @@ Manages invoices, charges, checkout sessions, and payment intent lookups for bot
 
 ## Mobile Endpoints
 
-### GET /mobile/appointment/:appointmentId
-Get the invoice for a specific appointment.
+### POST /mobile/appointment/:appointmentId
+List invoices for an appointment from the mobile app.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`appointmentId\`
-- **Controller:** \`InvoiceController.getByAppointmentMobile\`
+- **Controller:** \`InvoiceController.listInvoicesForAppointment\`
 
 ### GET /mobile/payment-intent/:paymentIntentId
 Get the invoice associated with a Stripe payment intent.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`paymentIntentId\`
-- **Controller:** \`InvoiceController.getByPaymentIntentMobile\`
+- **Controller:** \`InvoiceController.getInvoiceByPaymentIntentId\`
 
 ### GET /mobile/:invoiceId
 Get a specific invoice by ID.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`invoiceId\`
-- **Controller:** \`InvoiceController.getByIdMobile\`
+- **Controller:** \`InvoiceController.getInvoiceById\`
 
 ---
 
@@ -30,46 +30,40 @@ Get a specific invoice by ID.
 ### POST /appointment/:appointmentId/charges
 Add charges to an appointment invoice.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`appointmentId\`
 - **Body:** \`{ charges: [{ description, amount, quantity, itemId }] }\`
-- **Controller:** \`InvoiceController.addCharges\`
+- **Controller:** \`InvoiceController.addChargesToAppointment\`
 - **Response:** \`201\` — \`{ data, message }\`
 
-### GET /appointment/:appointmentId
-Get the invoice for a specific appointment.
+### POST /appointment/:appointmentId
+List invoices for an appointment.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`appointmentId\`
-- **Controller:** \`InvoiceController.getByAppointment\`
+- **Controller:** \`InvoiceController.listInvoicesForAppointment\`
 
 ### GET /payment-intent/:paymentIntentId
 Get the invoice associated with a Stripe payment intent.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`paymentIntentId\`
-- **Controller:** \`InvoiceController.getByPaymentIntent\`
+- **Controller:** \`InvoiceController.getInvoiceByPaymentIntentId\`
 
 ### GET /organisation/:organisationId/list
 List all invoices for an organisation.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`organisationId\`
-- **Controller:** \`InvoiceController.listByOrganisation\`
+- **Controller:** \`InvoiceController.listInvoicesForOrganisation\`
 
 ### POST /:invoiceId/checkout-session
-Create a Stripe checkout session for an invoice.
+Create a Stripe checkout session for an invoice and email parent.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`invoiceId\`
-- **Controller:** \`InvoiceController.createCheckoutSession\`
+- **Controller:** \`InvoiceController.createCheckoutSessionForInvoice\`
 
-### GET /:invoiceId
-Get a specific invoice by ID.
+### POST /:invoiceId/mark-paid
+Mark an invoice as paid manually (in-clinic payment).
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`invoiceId\`
-- **Controller:** \`InvoiceController.getById\`
+- **Controller:** \`InvoiceController.markInvoicePaidManually\`
 
 ### PATCH /:invoiceId/payment-collection-method
 Update the payment collection method for an invoice.
@@ -78,4 +72,10 @@ Update the payment collection method for an invoice.
 - **Body:** \`{ paymentCollectionMethod: "PAYMENT_INTENT" | "PAYMENT_LINK" | "PAYMENT_AT_CLINIC" }\`
 - **Controller:** \`InvoiceController.updatePaymentCollectionMethod\`
 - **Response:** \`200\` — Updated invoice object
+
+### GET /:invoiceId
+Get a specific invoice by ID.
+- **Auth:** \`authorizeCognito\`
+- **Params:** \`invoiceId\`
+- **Controller:** \`InvoiceController.getInvoiceById\`
 `;

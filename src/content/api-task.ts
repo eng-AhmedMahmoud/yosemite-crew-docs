@@ -23,12 +23,19 @@ Get a specific task by ID.
 - **Params:** \`taskId\`
 - **Controller:** \`TaskController.getByIdMobile\`
 
+### PATCH /mobile/:taskId
+Update a task from the mobile app.
+- **Auth:** \`authorizeCognitoMobile\`
+- **Params:** \`taskId\`
+- **Body:** Task fields to update
+- **Controller:** \`TaskController.updateTask\`
+
 ### POST /mobile/:taskId/status
 Update the status of a task.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`taskId\`
 - **Body:** \`{ status, completion }\`
-- **Controller:** \`TaskController.updateStatusMobile\`
+- **Controller:** \`TaskController.changeStatus\`
 
 ### GET /mobile/companion/:companionId
 List tasks for a specific companion.
@@ -85,16 +92,23 @@ List tasks for a specific companion from the PMS.
 ### GET /pms/library
 List all task library entries.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
-- **Controller:** \`TaskController.listLibrary\`
+- **Controller:** \`TaskLibraryController.list\`
+
+### POST /pms/library
+Create a new task library entry.
+- **Controller:** \`TaskLibraryController.create\`
 
 ### PUT /pms/library/:libraryId
 Update a task library entry.
-- **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`libraryId\`
 - **Body:** Library entry fields to update
-- **Controller:** \`TaskController.updateLibrary\`
+- **Controller:** \`TaskLibraryController.update\`
+
+### GET /pms/library/:libraryId
+Get a task library entry by ID.
+- **Auth:** \`authorizeCognito\`
+- **Params:** \`libraryId\`
+- **Controller:** \`TaskLibraryController.getById\`
 
 ---
 
@@ -117,17 +131,22 @@ Get a specific task template by ID.
 ### POST /pms/templates
 Create a new task template.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Body:** Template definition payload
-- **Controller:** \`TaskController.createTemplate\`
+- **Controller:** \`TaskTemplateController.create\`
 - **Response:** \`201\` — \`{ data, message }\`
 
-### DELETE /pms/templates/:templateId
-Delete a task template.
+### PATCH /pms/templates/:templateId
+Update a task template.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`templateId\`
-- **Controller:** \`TaskController.deleteTemplate\`
+- **Body:** Template fields to update
+- **Controller:** \`TaskTemplateController.update\`
+
+### DELETE /pms/templates/:templateId
+Archive a task template.
+- **Auth:** \`authorizeCognito\`
+- **Params:** \`templateId\`
+- **Controller:** \`TaskTemplateController.archive\`
 
 ---
 

@@ -29,10 +29,15 @@ Get payment intent details from mobile.
 - **Controller:** \`StripeController.getPaymentIntentMobile\`
 
 ### GET /checkout-session/:sessionId
-Get checkout session details from mobile.
-- **Auth:** \`authorizeCognitoMobile\`
+Get checkout session status (public — used for success/cancel pages).
 - **Params:** \`sessionId\`
-- **Controller:** \`StripeController.getCheckoutSessionMobile\`
+- **Controller:** \`StripeController.retrieveCheckoutSession\`
+
+### GET /invoice/:invoiceId/payment-intent
+Create a payment intent for an invoice from the mobile app.
+- **Auth:** \`authorizeCognitoMobile\`
+- **Params:** \`invoiceId\`
+- **Controller:** \`StripeController.createPaymentIntentForInvoice\`
 
 ---
 
