@@ -8,22 +8,22 @@ API docs are split by router. Base paths reflect the registration in \`apps/back
 | Router | Base Path | Description | Endpoints |
 |--------|-----------|-------------|-----------|
 | [Appointment](/docs/api-appointment) | \`/fhir/v1/appointment\` | Scheduling, rescheduling, cancellation, check-in | 18 |
-| [Chat](/docs/api-chat) | \`/v1/chat\` | Token generation, channels, sessions | 18 |
-| [Companion](/docs/api-companion) | \`/fhir/v1/companion\` | Pet profiles, creation, updates, search | 7 |
-| [Document](/docs/api-document) | \`/v1/document\` | File upload, creation, retrieval | 20 |
-| [Form](/docs/api-form) | \`/fhir/v1/form\` | Digital forms, submissions, SOAP notes | 17 |
-| [Inventory](/docs/api-inventory) | \`/v1/inventory\` | Items, batches, stock, vendors, alerts | 33 |
+| [Chat](/docs/api-chat) | \`/v1/chat\` | Token generation, channels, sessions | 15 |
+| [Companion](/docs/api-companion) | \`/fhir/v1/companion\` | Pet profiles, creation, updates, search | 10 |
+| [Document](/docs/api-document) | \`/v1/document\` | File upload, creation, retrieval | 17 |
+| [Form](/docs/api-form) | \`/fhir/v1/form\` | Digital forms, submissions, SOAP notes | 21 |
+| [Inventory](/docs/api-inventory) | \`/v1/inventory\` | Items, batches, stock, vendors, alerts | 27 |
 | [Invoice](/docs/api-invoice) | \`/fhir/v1/invoice\` | Billing, payment intents, checkout, collection methods | 11 |
-| [Organization](/docs/api-organization) | \`/fhir/v1/organization\` | Clinic management, search, invites | 10 |
-| [Task](/docs/api-task) | \`/v1/task\` | Task management, templates, library | 16 |
-| [User](/docs/api-user) | \`/fhir/v1/user\` | User retrieval and name updates | 2 |
+| [Organization](/docs/api-organization) | \`/fhir/v1/organization\` | Clinic management, search, invites | 13 |
+| [Task](/docs/api-task) | \`/v1/task\` | Task management, templates, library | 23 |
+| [User](/docs/api-user) | \`/fhir/v1/user\` | User accounts, retrieval, deletion | 4 |
 
 ## Supporting APIs
 
 | Router | Base Path | Description | Endpoints |
 |--------|-----------|-------------|-----------|
 | [Notification](/docs/api-notification) | \`/v1/notification\` | Push notification listing and status | 2 |
-| [Stripe](/docs/api-stripe) | \`/v1/stripe\` | Payment processing, connected accounts | 11 |
+| [Stripe](/docs/api-stripe) | \`/v1/stripe\` | Payment processing, connected accounts | 12 |
 | Account Withdrawal | \`/v1/account-withdrawal\` | User account deletion requests | 1 |
 | Adverse Event | \`/v1/adverse-event\` | Adverse event reporting | 4 |
 | Audit Trail | \`/v1/audit-trail\` | Activity logging per companion/appointment | 2 |

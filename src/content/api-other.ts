@@ -205,7 +205,7 @@ Provides clinical reference search via the Merck Veterinary Manual API with time
 - **Endpoints:** 1
 - **Auth:** \`authorizeCognito\` + RBAC (\`integrations:view:any\`)
 - **Key routes:**
-  - \`GET /v1/knowledge/pms/organisation/:organisationId/merck/manuals/search\` — Search manuals (params: q, audience, language, media, timezone, code, codeSystem)
+  - \`GET /v1/knowledge/pms/organisation/:organisationId/merck/manuals/search\` — Search manuals (params: q, audience, language, media, timezone, code, codeSystem, displayName, originalText, subTopicCode, subTopicDisplay)
 
 ## User Profile
 Manages detailed user profile information beyond basic account data.
