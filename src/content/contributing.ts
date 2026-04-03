@@ -87,21 +87,50 @@ All commit messages must follow this format:
 
 | Scope | Description |
 |-------|-------------|
-| \`website\` | Frontend changes |
-| \`api\` | Backend changes |
+| \`backend\` | Backend (Express API) changes |
+| \`frontend\` | Frontend (Next.js) changes |
+| \`mobile\` | Mobile app (React Native) changes |
+| \`dev-docs\` | Developer documentation changes |
+| \`types\` | Shared types package changes |
+| \`fhirtypes\` | FHIR types package changes |
+| \`repo\` | Repository-level changes |
+| \`ci\` | CI/CD configuration changes |
+| \`docs\` | General documentation changes |
 
 ### Examples
 
 \`\`\`
-feat(website): add appointment calendar view
-fix(api): resolve duplicate notification issue
-docs(website): update README with setup instructions
-refactor(api): simplify auth middleware chain
+feat(backend): add IDEXX lab order endpoints
+fix(frontend): resolve duplicate notification issue
+docs(dev-docs): update API index with new routers
+refactor(backend): simplify auth middleware chain
 \`\`\`
 
 ### Reverts
 
 \`\`\`
-revert: feat(website): add appointment calendar view
+revert: feat(backend): add IDEXX lab order endpoints
 \`\`\`
+
+## Automated Quality Checks
+
+The repository uses **commitlint** and **lint-staged** to enforce standards automatically:
+
+- **commitlint** — Validates commit messages against the conventional format above. Commits that don't match \`<type>(<scope>): <subject>\` will be rejected.
+- **lint-staged** — Runs linting and formatting on staged files before each commit.
+
+These run automatically via Git hooks — no manual setup required after \`pnpm install\`.
+
+## Definition of Done
+
+Before merging, all changes must satisfy:
+
+\`\`\`bash
+pnpm run lint         # Code linting
+pnpm run type-check   # TypeScript type checking
+pnpm run test         # Test suite
+pnpm run build        # Production build
+\`\`\`
+
+Updated docs are required for any changed behavior, setup steps, or workflows.
 `;

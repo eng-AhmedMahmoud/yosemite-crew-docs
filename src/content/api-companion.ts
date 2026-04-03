@@ -56,8 +56,7 @@ Create a new companion from the PMS.
 
 ### GET /org/:id
 Get companion details by ID (PMS).
-- **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **Auth:** None (public — auth middleware is currently disabled on this route)
 - **Params:** \`id\`
 - **Controller:** \`CompanionController.getCompanionById\`
 

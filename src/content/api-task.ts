@@ -9,7 +9,7 @@ Manages care tasks, task libraries, and task templates for both mobile app and P
 Create a custom task from the mobile app.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Body:** \`{ title, description, assignedTo, companionId, dueDate, frequency }\`
-- **Controller:** \`TaskController.createCustomMobile\`
+- **Controller:** \`TaskController.createCustomTask\`
 - **Response:** \`201\` — \`{ data, message }\`
 
 ### GET /mobile/task
@@ -21,7 +21,7 @@ List parent-level tasks for the authenticated user.
 Get a specific task by ID.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`taskId\`
-- **Controller:** \`TaskController.getByIdMobile\`
+- **Controller:** \`TaskController.getById\`
 
 ### PATCH /mobile/:taskId
 Update a task from the mobile app.
@@ -41,7 +41,7 @@ Update the status of a task.
 List tasks for a specific companion.
 - **Auth:** \`authorizeCognitoMobile\`
 - **Params:** \`companionId\`
-- **Controller:** \`TaskController.listByCompanionMobile\`
+- **Controller:** \`TaskController.listForCompanion\`
 
 ---
 
@@ -68,22 +68,20 @@ Create a custom task from the PMS.
 - **Auth:** \`authorizeCognito\`
 - **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Body:** \`{ title, description, companionId, assignedTo, dueDate, frequency }\`
-- **Controller:** \`TaskController.createCustomPms\`
+- **Controller:** \`TaskController.createCustomTaskFromPms\`
 - **Response:** \`201\` — \`{ data, message }\`
 
 ### GET /pms/organisation/:organisationId
-List all tasks for an organisation.
+List all employee tasks for an organisation.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`organisationId\`
-- **Controller:** \`TaskController.listByOrganisation\`
+- **Controller:** \`TaskController.listEmployeeTasks\`
 
 ### GET /pms/companion/:companionId
 List tasks for a specific companion from the PMS.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`companionId\`
-- **Controller:** \`TaskController.listByCompanionPms\`
+- **Controller:** \`TaskController.listForCompanion\`
 
 ---
 
@@ -117,16 +115,14 @@ Get a task library entry by ID.
 ### GET /pms/templates/organisation/:organisationId
 List all task templates for an organisation.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`organisationId\`
-- **Controller:** \`TaskController.listTemplates\`
+- **Controller:** \`TaskTemplateController.list\`
 
 ### GET /pms/templates/:templateId
 Get a specific task template by ID.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
 - **Params:** \`templateId\`
-- **Controller:** \`TaskController.getTemplate\`
+- **Controller:** \`TaskTemplateController.getById\`
 
 ### POST /pms/templates
 Create a new task template.
@@ -155,23 +151,23 @@ Archive a task template.
 ### GET /pms/:taskId
 Get a specific task by ID from the PMS.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("tasks:view:any" | "tasks:view:own")\`
 - **Params:** \`taskId\`
-- **Controller:** \`TaskController.getByIdPms\`
+- **Controller:** \`TaskController.getById\`
 
 ### PATCH /pms/:taskId
 Update a task from the PMS.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("tasks:edit:any" | "tasks:edit:own")\`
 - **Params:** \`taskId\`
 - **Body:** Task fields to update
-- **Controller:** \`TaskController.updatePms\`
+- **Controller:** \`TaskController.updateTaskPMS\`
 
 ### POST /pms/:taskId/status
 Update the status of a task from the PMS.
 - **Auth:** \`authorizeCognito\`
-- **RBAC:** \`withOrgPermissions\`, \`requirePermission\`
+- **RBAC:** \`withOrgPermissions\`, \`requirePermission("tasks:edit:any" | "tasks:edit:own")\`
 - **Params:** \`taskId\`
 - **Body:** \`{ status, completion }\`
-- **Controller:** \`TaskController.updateStatusPms\`
+- **Controller:** \`TaskController.changeStatusPMS\`
 `;
