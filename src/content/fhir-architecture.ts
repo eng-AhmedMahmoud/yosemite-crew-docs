@@ -3,6 +3,13 @@ export const content = `
 
 Yosemite Crew models animal health workflows using **FHIR (Fast Healthcare Interoperability Resources)** with custom extensions adapted for veterinary use cases.
 
+## Package Layout
+
+- **\`packages/types\`** — Domain types, FHIR mappings, DTOs, and helper functions
+- **\`packages/fhirtypes\`** — Shared FHIR type definitions
+
+> **Note:** The \`packages/fhir\` package has been removed. FHIR resource helpers previously in that package have been replaced by Postgres-native implementations during the MongoDB-to-PostgreSQL migration.
+
 ## How It Is Built
 
 1. **Define domain models** and helpers in \`packages/types/src\`

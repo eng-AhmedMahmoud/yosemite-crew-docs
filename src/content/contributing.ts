@@ -47,19 +47,31 @@ pnpm run test
 pnpm run build
 \`\`\`
 
+Pre-commit hooks (via \`lint-staged\`) automatically run **ESLint** (\`--max-warnings=0\`), **Prettier**, and **Secretlint** on staged files. Mobile files are linted through the \`mobileAppYC\` workspace filter.
+
 ### Pull Request
 
 1. Push to your fork
 2. Open a PR targeting the \`dev\` branch
-3. Fill out the PR template
+3. Fill out the PR template — **PR titles must follow semantic format** (e.g. \`feat(backend): add lab order API\`)
 4. Wait for code review
+5. The \`pr-governance\` GitHub Actions workflow validates PR titles and commit messages automatically
+
+### Definition of Done
+
+- Lint passes with zero warnings
+- Type-check passes
+- All tests pass
+- Build succeeds
+- Documentation updated for public-facing changes
 
 ## Coding Rules
 
 - All features must be tested
-- Follow [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
+- Code is formatted with Prettier (print width 100, single quotes, trailing commas ES5)
 - Use TypeScript for type safety
 - Document public APIs
+- No secrets in code (enforced by Secretlint)
 
 ## Commit Message Format
 
@@ -85,6 +97,8 @@ All commit messages must follow this format:
 
 ### Scopes
 
+Scopes are enforced by \`commitlint.config.cjs\`:
+
 | Scope | Description |
 |-------|-------------|
 | \`backend\` | Backend (Express API) changes |
@@ -93,17 +107,18 @@ All commit messages must follow this format:
 | \`dev-docs\` | Developer documentation changes |
 | \`types\` | Shared types package changes |
 | \`fhirtypes\` | FHIR types package changes |
-| \`repo\` | Repository-level changes |
-| \`ci\` | CI/CD configuration changes |
-| \`docs\` | General documentation changes |
+| \`repo\` | Repository-wide config and tooling |
+| \`ci\` | CI/CD workflow changes |
+| \`docs\` | Documentation changes |
 
 ### Examples
 
 \`\`\`
 feat(backend): add IDEXX lab order endpoints
 fix(frontend): resolve duplicate notification issue
-docs(dev-docs): update API index with new routers
+docs(repo): update contributing guide with new scopes
 refactor(backend): simplify auth middleware chain
+ci(backend): add Prisma generate step to sonar workflow
 \`\`\`
 
 ### Reverts

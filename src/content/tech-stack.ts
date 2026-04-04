@@ -7,7 +7,7 @@ export const content = `
 |-----------|---------|---------|
 | TypeScript | Type safety across all apps | 5.x |
 | Turborepo | Monorepo build orchestration | 2.5 |
-| pnpm | Package management with workspaces | 8.15+ |
+| pnpm | Package management with workspaces | 10.30+ |
 
 ## Frontend (Web PMS)
 

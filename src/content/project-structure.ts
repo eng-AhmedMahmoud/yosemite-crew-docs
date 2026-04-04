@@ -23,11 +23,15 @@ Yosemite-Crew/
 │   │       ├── invoice.ts
 │   │       ├── form.ts
 │   │       └── ...
-│   ├── fhir/              # FHIR resource implementations
 │   └── fhirtypes/         # FHIR type definitions
-├── Guides/                # Implementation guides
+├── docs/                  # Engineering documentation
+│   ├── engineering-standards.md
+│   └── guide/             # Setup and implementation guides
 ├── turbo.json             # Turborepo build configuration
 ├── pnpm-workspace.yaml    # Workspace configuration
+├── commitlint.config.cjs  # Conventional commit enforcement
+├── lint-staged.config.cjs # Pre-commit lint and format hooks
+├── .prettierrc.json       # Code formatting rules
 ├── CONTRIBUTING.md
 └── README.md
 \`\`\`
@@ -83,7 +87,7 @@ The REST API server built with:
 Key directories:
 \`\`\`
 apps/backend/src/
-├── routers/               # Express route handlers (37 routers)
+├── routers/               # Express route handlers (41 routers)
 ├── controllers/           # Business logic controllers
 ├── services/              # Service layer
 ├── models/                # Mongoose models
@@ -115,9 +119,9 @@ Central type definitions shared across all apps. Contains:
 - DTO wrappers for API request/response validation
 - Custom FHIR extensions for animal health
 
-### \`packages/fhir\` & \`packages/fhirtypes\`
+### \`packages/fhirtypes\`
 
-FHIR (Fast Healthcare Interoperability Resources) implementations adapted for veterinary/animal health use cases.
+FHIR type definitions adapted for veterinary/animal health use cases. The \`packages/fhir\` package was removed in favour of Postgres-native implementations; only \`fhirtypes\` remains for shared type definitions.
 
 ## Build System
 
@@ -149,7 +153,6 @@ Apps reference shared packages using workspace protocol:
 \`\`\`json
 {
   "@yosemite-crew/types": "workspace:^",
-  "@yosemite-crew/fhir": "workspace:^",
   "@yosemite-crew/fhirtypes": "workspace:^"
 }
 \`\`\`
@@ -157,8 +160,11 @@ Apps reference shared packages using workspace protocol:
 ## CI/CD
 
 - **GitHub Actions** for continuous integration
-- **SonarCloud** for code quality analysis
+- **SonarCloud** for code quality analysis (with Prisma client generation for backend coverage)
 - **CodeQL** for security scanning
+- **PR Governance** workflow — validates semantic PR titles and conventional commit messages on every PR
+- **Commitlint** enforces conventional commit format with scoped types
+- **lint-staged** runs ESLint, Prettier, and Secretlint on staged files pre-commit
 - PRs target the \`dev\` branch and are merged to \`main\` for releases
 
 ## Design System

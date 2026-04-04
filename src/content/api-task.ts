@@ -163,7 +163,7 @@ Update a task from the PMS.
 - **Body:** Task fields to update
 - **Controller:** \`TaskController.updateTaskPMS\`
 
-### POST /pms/:taskId/status
+### POST /pms/:taskId/change-status
 Update the status of a task from the PMS.
 - **Auth:** \`authorizeCognito\`
 - **RBAC:** \`withOrgPermissions\`, \`requirePermission("tasks:edit:any" | "tasks:edit:own")\`

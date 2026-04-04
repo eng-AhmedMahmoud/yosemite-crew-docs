@@ -23,6 +23,7 @@ import { content as backendChatImplementation } from "./backend-chat-implementat
 import { content as notificationSetup } from "./notification-setup";
 import { content as liquidGlass } from "./liquid-glass";
 import { content as fhirArchitecture } from "./fhir-architecture";
+import { content as engineeringStandards } from "./engineering-standards";
 import { content as contributing } from "./contributing";
 import { content as codeOfConduct } from "./code-of-conduct";
 import { content as security } from "./security";
@@ -53,6 +54,7 @@ const contentMap: Record<string, string> = {
   "notification-setup": notificationSetup,
   "liquid-glass": liquidGlass,
   "fhir-architecture": fhirArchitecture,
+  "engineering-standards": engineeringStandards,
   contributing,
   "code-of-conduct": codeOfConduct,
   security,

@@ -59,6 +59,7 @@ export const navigation: NavSection[] = [
   {
     title: "Policies",
     items: [
+      { slug: "engineering-standards", title: "Engineering Standards" },
       { slug: "contributing", title: "Contributing" },
       { slug: "code-of-conduct", title: "Code of Conduct" },
       { slug: "security", title: "Security" },
