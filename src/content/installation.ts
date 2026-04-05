@@ -36,6 +36,9 @@ pnpm install
 # Run Prisma migrations for PostgreSQL
 cd apps/backend
 npx prisma migrate dev
+
+# Seed the code system (species, breeds, observation codes)
+pnpm run seed-codebook
 \`\`\`
 
 Set \`READ_FROM_POSTGRES=true\` in \`apps/backend/.env\` to enable reading from PostgreSQL (recommended for new setups).

@@ -75,7 +75,8 @@ apps/frontend/src/
 
 The REST API server built with:
 - **Express 4** on Node.js 22 (ESM)
-- **MongoDB** via Mongoose for data storage
+- **PostgreSQL** via Prisma ORM (primary database)
+- **MongoDB** via Mongoose (legacy, migration in progress)
 - **Redis** via BullMQ for job queues and caching
 - **Socket.io** for real-time events
 - **AWS SDK** (S3, Cognito, SES, Pinpoint)
@@ -89,12 +90,24 @@ Key directories:
 apps/backend/src/
 ├── routers/               # Express route handlers (41 routers)
 ├── controllers/           # Business logic controllers
-├── services/              # Service layer
-├── models/                # Mongoose models
+│   ├── app/               # Mobile app controllers
+│   └── web/               # PMS web controllers
+├── services/              # Service layer (60+ services)
+├── models/                # Mongoose schemas (legacy)
+├── integrations/          # Third-party lab integrations
+│   ├── idexx/             # IDEXX laboratory client & adapter
+│   └── merck/             # Merck veterinary products client
+├── labs/                  # Lab-specific order processing
 ├── middleware/             # Auth, RBAC, validation
 ├── jobs/                  # BullMQ job processors
 ├── utils/                 # Helper functions
-└── config/                # App configuration
+├── config/                # App configuration & read-switch
+├── scripts/               # Migration and maintenance scripts
+└── data/                  # Reference data (breed catalogs)
+
+apps/backend/prisma/
+├── schema.prisma          # PostgreSQL schema (110+ models)
+└── migrations/            # Database migration history
 \`\`\`
 
 ### Mobile App (\`apps/mobileAppYC\`)
@@ -161,7 +174,7 @@ Apps reference shared packages using workspace protocol:
 
 - **GitHub Actions** for continuous integration
 - **SonarCloud** for code quality analysis (with Prisma client generation for backend coverage)
-- **CodeQL** for security scanning
+- **CodeQL** for security vulnerability scanning
 - **PR Governance** workflow — validates semantic PR titles and conventional commit messages on every PR
 - **Commitlint** enforces conventional commit format with scoped types
 - **lint-staged** runs ESLint, Prettier, and Secretlint on staged files pre-commit

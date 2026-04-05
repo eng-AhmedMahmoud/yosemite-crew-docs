@@ -122,6 +122,29 @@ The API has **41 routers** covering all platform functionality. See the [API Ind
 - [Invoice API](/docs/api-invoice) — Billing and payments
 - [Organization API](/docs/api-organization) — Clinic management
 
+## Reference Data
+
+The backend ships static breed catalogs under \`apps/backend/data/\`:
+
+| File | Content |
+|------|---------|
+| \`canine_breeds.json\` | ~14,000 canine breed entries |
+| \`equine_breeds.json\` | ~3,900 equine breed entries |
+| \`feline_breeds.json\` | ~2,000 feline breed entries |
+
+These are seeded into the code system via \`pnpm run seed-codebook\` and exposed through the Code router (\`/v1/codes\`).
+
+## Migration Scripts
+
+Located in \`apps/backend/src/scripts/\`:
+
+| Script | Purpose |
+|--------|---------|
+| \`migrate-all.ts\` | Batch-migrates all collections from MongoDB to PostgreSQL |
+| \`migrate-contact-requests.ts\` | Targeted migration for contact request records |
+| \`parity-check.ts\` | Validates data consistency between MongoDB and PostgreSQL |
+| \`seed-codebook.ts\` | Seeds species, breed, and observation code entries into PostgreSQL |
+
 ## Scripts
 
 \`\`\`bash
