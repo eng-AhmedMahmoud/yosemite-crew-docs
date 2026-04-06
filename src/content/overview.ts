@@ -18,7 +18,8 @@ Yosemite Crew is an **open-source operating system** designed for the animal hea
 ## For Developers
 
 - **Empowering Innovation:** The dedicated developer portal is at the heart of an ecosystem that mirrors the versatility of the WordPress plugin model.
-- **Flexible Development Environment:** Equipped with robust public APIs, comprehensive documentation, and ready-to-use MVP templates, developers can quickly create, install, and manage custom plugins.
+- **Flexible Development Environment:** Equipped with robust public APIs, Swagger/OpenAPI documentation, and ready-to-use MVP templates, developers can quickly create, install, and manage custom plugins.
+- **Integrations Ecosystem:** First-party integrations with IDEXX (lab diagnostics), Merck Vet Manual (clinical references), Stripe (payments), and Documenso (e-signatures) serve as blueprints for third-party extensions.
 - **Community-Driven Growth:** This open-source approach fosters a collaborative environment where developers can continuously innovate and expand veterinary care options.
 
 ## Community

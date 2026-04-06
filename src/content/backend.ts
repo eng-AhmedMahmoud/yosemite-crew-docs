@@ -97,8 +97,8 @@ The backend models animal health workflows using FHIR resources plus custom code
 | Org Rooms | \`Location\` | \`packages/types/src/organisationRoom.ts\` |
 | Services | \`HealthcareService\` | \`packages/types/src/service.ts\` |
 | User-Org Roles | \`PractitionerRole\` | \`packages/types/src/userOrganization.ts\` |
-| Pets (Companions) | \`Patient\` | \`packages/types/src/companion.ts\` |
-| Pet Owners (Parents) | \`RelatedPerson\` | \`packages/types/src/parent.ts\` |
+| Pets (Companions) | \`Patient\` | \`packages/types/src/companion.ts\` (includes breeding, insurance, physical attributes, medical records) |
+| Pet Owners (Parents) | \`RelatedPerson\` | \`packages/types/src/parent.ts\` (includes timezone, currency, profile completion) |
 | Appointments | \`Appointment\` | \`packages/types/src/appointment.ts\` |
 | Invoices | \`Invoice\` | \`packages/types/src/invoice.ts\` |
 | Forms | \`Questionnaire\` | \`packages/types/src/form.ts\` |
@@ -113,6 +113,8 @@ Each DTO file in \`packages/types/src/dto\` provides:
 
 ## API Documentation
 
+The backend ships a **Swagger / OpenAPI** reference via the embedded dev-docs Docusaurus site. During development, the full interactive API explorer is available at the developer portal route within the frontend.
+
 The API has **41 routers** covering all platform functionality. See the [API Index](/docs/api-index) for the complete list, or jump to specific APIs:
 
 - [Appointment API](/docs/api-appointment) — Scheduling and management
@@ -121,6 +123,33 @@ The API has **41 routers** covering all platform functionality. See the [API Ind
 - [Inventory API](/docs/api-inventory) — Stock and supplies
 - [Invoice API](/docs/api-invoice) — Billing and payments
 - [Organization API](/docs/api-organization) — Clinic management
+
+## Reference Data
+
+The backend ships static breed catalogs under \`apps/backend/data/\`:
+
+| File | Content |
+|------|---------|
+| \`canine_breeds.json\` | ~14,000 canine breed entries |
+| \`equine_breeds.json\` | ~3,900 equine breed entries |
+| \`feline_breeds.json\` | ~2,000 feline breed entries |
+
+These are seeded into the code system via \`pnpm run seed-codebook\` and exposed through the Code router (\`/v1/codes\`).
+
+## Migration Scripts
+
+Located in \`apps/backend/src/scripts/\`:
+
+| Script | Purpose |
+|--------|---------|
+| \`migrate-all.ts\` | Batch-migrates all collections from MongoDB to PostgreSQL |
+| \`migrate-contact-requests.ts\` | Targeted migration for contact request records |
+| \`parity-check.ts\` | Validates data consistency between MongoDB and PostgreSQL |
+| \`seed-codebook.ts\` | Seeds species, breed, and observation code entries into PostgreSQL |
+
+### Backfill Jobs
+
+The backend includes a backfill job mechanism (\`jobs/\`) that runs on startup to apply new permissions or data patches retroactively to existing organisations. New integrations (e.g. IDEXX credential validation) leverage this to ensure consistent state across all tenants.
 
 ## Scripts
 

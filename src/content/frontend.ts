@@ -113,4 +113,12 @@ pnpm run test         # Run Jest tests
 - **Task Management** — Custom tasks with templates and library items
 - **Multi-Organization** — Support for multiple clinic locations
 - **RBAC** — Role-based access control for staff permissions
+- **Finance** — Dedicated finance view linking invoices to appointments with filterable data tables and summary widgets
+- **IDEXX Integration** — Lab order creation, test catalog browsing, result retrieval with PDF preview, IVLS census management
+- **Merck Vet Manual** — Clinical reference search with multi-language support, embedded mode, and HL7 InfoButton integration
+- **Trust Center** — Public compliance page displaying certifications, security pillars, sub-processors, and data processing details
+- **Guides & Tutorials** — Video guide library with category filtering, search, and modal player
+- **Contact Us** — Public contact form with query type selection, data access requests, and file upload support
+- **Developer Portal** — Embedded Docusaurus developer documentation with Swagger/OpenAPI reference for backend APIs
+- **Toast Notifications** — System-wide toast notification system (error, success, info, warning) via react-toastify
 `;

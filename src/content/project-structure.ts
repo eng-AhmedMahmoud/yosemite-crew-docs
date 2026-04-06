@@ -11,7 +11,7 @@ Yosemite-Crew/
 │   ├── frontend/          # Next.js 15 web application (PMS)
 │   ├── backend/           # Express.js REST API server
 │   ├── mobileAppYC/       # React Native mobile app
-│   └── dev-docs/          # Docusaurus documentation (internal)
+│   └── dev-docs/          # Docusaurus developer documentation (embedded in frontend)
 ├── packages/
 │   ├── types/             # Shared TypeScript types & FHIR mappings
 │   │   └── src/
@@ -23,11 +23,15 @@ Yosemite-Crew/
 │   │       ├── invoice.ts
 │   │       ├── form.ts
 │   │       └── ...
-│   ├── fhir/              # FHIR resource implementations
 │   └── fhirtypes/         # FHIR type definitions
-├── Guides/                # Implementation guides
+├── docs/                  # Engineering documentation
+│   ├── engineering-standards.md
+│   └── guide/             # Setup and implementation guides
 ├── turbo.json             # Turborepo build configuration
 ├── pnpm-workspace.yaml    # Workspace configuration
+├── commitlint.config.cjs  # Conventional commit enforcement
+├── lint-staged.config.cjs # Pre-commit lint and format hooks
+├── .prettierrc.json       # Code formatting rules
 ├── CONTRIBUTING.md
 └── README.md
 \`\`\`
@@ -71,7 +75,8 @@ apps/frontend/src/
 
 The REST API server built with:
 - **Express 4** on Node.js 22 (ESM)
-- **MongoDB** via Mongoose for data storage
+- **PostgreSQL** via Prisma ORM (primary database)
+- **MongoDB** via Mongoose (legacy, migration in progress)
 - **Redis** via BullMQ for job queues and caching
 - **Socket.io** for real-time events
 - **AWS SDK** (S3, Cognito, SES, Pinpoint)
@@ -83,14 +88,26 @@ The REST API server built with:
 Key directories:
 \`\`\`
 apps/backend/src/
-├── routers/               # Express route handlers (37 routers)
+├── routers/               # Express route handlers (41 routers)
 ├── controllers/           # Business logic controllers
-├── services/              # Service layer
-├── models/                # Mongoose models
+│   ├── app/               # Mobile app controllers
+│   └── web/               # PMS web controllers
+├── services/              # Service layer (60+ services)
+├── models/                # Mongoose schemas (legacy)
+├── integrations/          # Third-party lab integrations
+│   ├── idexx/             # IDEXX laboratory client & adapter
+│   └── merck/             # Merck veterinary products client
+├── labs/                  # Lab-specific order processing
 ├── middleware/             # Auth, RBAC, validation
 ├── jobs/                  # BullMQ job processors
 ├── utils/                 # Helper functions
-└── config/                # App configuration
+├── config/                # App configuration & read-switch
+├── scripts/               # Migration and maintenance scripts
+└── data/                  # Reference data (breed catalogs)
+
+apps/backend/prisma/
+├── schema.prisma          # PostgreSQL schema (110+ models)
+└── migrations/            # Database migration history
 \`\`\`
 
 ### Mobile App (\`apps/mobileAppYC\`)
@@ -115,9 +132,13 @@ Central type definitions shared across all apps. Contains:
 - DTO wrappers for API request/response validation
 - Custom FHIR extensions for animal health
 
-### \`packages/fhir\` & \`packages/fhirtypes\`
+### \`packages/fhirtypes\`
 
-FHIR (Fast Healthcare Interoperability Resources) implementations adapted for veterinary/animal health use cases.
+FHIR type definitions adapted for veterinary/animal health use cases. The \`packages/fhir\` package was removed in favour of Postgres-native implementations; only \`fhirtypes\` remains for shared type definitions.
+
+### \`apps/dev-docs\`
+
+Internal developer documentation site built with **Docusaurus**. Contains Swagger/OpenAPI reference for backend APIs and architectural guides. The dev-docs build is embedded into the frontend so developers can access API documentation directly from the PMS.
 
 ## Build System
 
@@ -149,7 +170,6 @@ Apps reference shared packages using workspace protocol:
 \`\`\`json
 {
   "@yosemite-crew/types": "workspace:^",
-  "@yosemite-crew/fhir": "workspace:^",
   "@yosemite-crew/fhirtypes": "workspace:^"
 }
 \`\`\`
@@ -157,8 +177,11 @@ Apps reference shared packages using workspace protocol:
 ## CI/CD
 
 - **GitHub Actions** for continuous integration
-- **SonarCloud** for code quality analysis
-- **CodeQL** for security scanning
+- **SonarCloud** for code quality analysis (with Prisma client generation for backend coverage)
+- **CodeQL** for security vulnerability scanning
+- **PR Governance** workflow — validates semantic PR titles and conventional commit messages on every PR
+- **Commitlint** enforces conventional commit format with scoped types
+- **lint-staged** runs ESLint, Prettier, and Secretlint on staged files pre-commit
 - PRs target the \`dev\` branch and are merged to \`main\` for releases
 
 ## Design System

@@ -84,7 +84,9 @@ pnpm run ios
 - **Appointment Booking** — Search clinics, view availability, book appointments
 - **Push Notifications** — Firebase Cloud Messaging with Notifee
 - **Real-time Chat** — Stream Chat integration
-- **Pet Profiles** — Manage companion (pet) health records
+- **Pet Profiles** — Manage companion (pet) profiles with breeding info, medical records, insurance, and physical attributes
+- **Breed Data** — Bundled breed catalogs (dogs, cats, horses) for offline species/breed selection
+- **Linked Businesses** — Discover, search, and link to veterinary businesses via directory search or QR code scanning
 - **Documents** — View and upload medical documents
 - **Payments** — Stripe integration for appointment billing
 - **Deep Linking** — Custom \`yc://\` scheme for navigation
