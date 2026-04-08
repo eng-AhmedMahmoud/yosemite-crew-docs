@@ -119,4 +119,22 @@ pnpm run test         # Run Jest tests
 - **Guides & Tutorials** — Video guide library with category filtering, search, and modal player
 - **Contact Us** — Public contact form with query type selection, data access requests, and file upload support
 - **Toast Notifications** — System-wide toast notification system (error, success, info, warning) via react-toastify
+
+## Key Routes
+
+| Route | Description |
+|-------|-------------|
+| \`/dashboard\` | Analytics dashboard with configurable date ranges and trend charts |
+| \`/appointments\` | Appointment scheduling, management, and check-in |
+| \`/appointments/idexx-workspace\` | Dedicated IDEXX lab workspace for order creation and result review |
+| \`/companions\` | Patient (pet) profiles and medical history |
+| \`/inventory\` | Stock management, batches, and vendor tracking |
+| \`/invoices\` | Billing and payment management |
+| \`/tasks\` | Task management with templates and library |
+| \`/integrations\` | Third-party integration management (IDEXX, Merck) |
+| \`/integrations/merck-manuals\` | Merck Vet Manual search and browsing |
+| \`/embed/merck-manuals\` | Embedded Merck integration endpoint for in-appointment reference |
+| \`/trust-center\` | Public compliance page with certifications and security details |
+| \`/guides\` | Video guide library with category filtering and search |
+| \`/contact\` | Public contact form with query type selection and file upload |
 `;

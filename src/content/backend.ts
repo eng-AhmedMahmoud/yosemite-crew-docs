@@ -84,6 +84,18 @@ Full integration with IDEXX veterinary laboratory services including device mana
 ### Merck Vet Manual
 Integration with Merck Veterinary Manual for clinical reference searches via the Knowledge router (\`/v1/knowledge\`). Supports timezone-aware API routing (US/Canada vs. global endpoints), automatic HTML filtering, and rate limiting (120 req/15 min per org:user).
 
+## Background Queues & Schedulers
+
+The backend uses **BullMQ** to process lab data asynchronously. Queues and their schedulers live under \`apps/backend/src/queues/\`:
+
+| Queue | Purpose |
+|-------|---------|
+| \`lab-status\` | Polls IDEXX for order status changes and updates local records |
+| \`lab-results\` | Fetches new lab results from IDEXX and stores them locally |
+| \`idexx-reference\` | Syncs IDEXX reference-lab catalog data (test codes, species mappings) |
+
+Each queue has a paired \`*.scheduler.ts\` that registers recurring jobs via BullMQ's \`RepeatableJob\` API. Results are surfaced through the Lab Results API and the frontend IDEXX workspace.
+
 ## Animal Health Custom FHIR
 
 The backend models animal health workflows using FHIR resources plus custom code systems and extensions. The Code router (\`/v1/codes\`) exposes code system entries and value-set mappings used across the platform.

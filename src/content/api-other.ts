@@ -130,6 +130,9 @@ Provides aggregated dashboard data for PMS users including metrics and statistic
 - **Base path:** \`/v1/dashboard\`
 - **Endpoints:** 7
 - **Auth:** \`authorizeCognito\` + RBAC (\`analytics:view:any\`)
+- **Common query parameters:**
+  - \`range\` — Time window for data: \`today\`, \`yesterday\`, \`last_7_days\`, \`last_30_days\`, \`this_week\`, \`this_month\`, \`last_week\`, \`last_month\`, \`last_6_months\`, \`last_1_year\`
+  - \`bucket\` — Trend granularity: \`day\` or \`month\` (applies to trend endpoints)
 - **Key routes:**
   - \`GET /v1/dashboard/summary/:organisationId\` — Aggregated summary metrics
   - \`GET /v1/dashboard/appointments/:organisationId/trend\` — Appointment trend data

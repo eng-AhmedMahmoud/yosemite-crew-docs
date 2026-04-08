@@ -100,6 +100,7 @@ apps/backend/src/
 ├── labs/                  # Lab-specific order processing
 ├── middleware/             # Auth, RBAC, validation
 ├── jobs/                  # BullMQ job processors
+├── queues/                # Lab-related queue processors & schedulers
 ├── utils/                 # Helper functions
 ├── config/                # App configuration & read-switch
 ├── scripts/               # Migration and maintenance scripts
