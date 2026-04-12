@@ -23,7 +23,7 @@ export const content = `
 | Stripe React | Payment UI components | 5.4.1 |
 | Framer Motion | Animations | 12.18.1 |
 | Amazon Cognito | Authentication | 6.3.15 |
-| Axios | HTTP client | 1.12.0 |
+| Axios | HTTP client | 1.13.x |
 | React Hook Form | Form handling | — |
 | React Icons | Icon library | 5.3.0 |
 | Iconify | Additional icons | 6.0.0 |
@@ -46,10 +46,16 @@ export const content = `
 | AWS SES | Transactional email | — |
 | AWS Cognito | Authentication | — |
 | AWS Pinpoint | Push notifications | — |
+| Firebase Admin | Server-side push notifications | 13.6.0 |
+| Google Auth Library | Google OAuth authentication | 10.2.0 |
+| Express Rate Limit | API rate limiting middleware | 7.5.0 |
+| Express Mongo Sanitize | NoSQL injection prevention | 2.2.0 |
+| Playwright | Server-side browser automation | 1.57.0 |
 | Winston | Structured logging | 3.17.0 |
 | Zod | Runtime validation | 3.24.2 |
 | Class Validator | DTO validation decorators | — |
-| Multer | File upload middleware | 2.0.2 |
+| Class Transformer | DTO transformation and serialization | 0.5.1 |
+| Multer | File upload middleware | 2.1.1 |
 | fhir | FHIR resource library | 4.12.0 |
 | Jest | Testing framework | 29.7.0 |
 
