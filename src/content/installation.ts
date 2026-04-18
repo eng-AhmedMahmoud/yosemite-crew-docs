@@ -7,7 +7,7 @@ export const content = `
 - **Node.js** — v20 or later recommended
 - **pnpm** — package manager (v8.15+)
 - **PostgreSQL** — primary backend database
-- **MongoDB** — legacy database (still required during migration)
+- **MongoDB** — legacy database (optional — only needed if testing migration parity; new setups can skip this)
 - **Redis** — for caching and job queues
 
 ## Clone the Repository

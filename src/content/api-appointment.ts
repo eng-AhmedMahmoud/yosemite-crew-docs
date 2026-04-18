@@ -3,6 +3,16 @@ export const content = `
 
 Manages appointment scheduling, rescheduling, cancellation, and check-in for both mobile app and PMS (Practice Management System) platforms.
 
+## Status Types
+
+**AppointmentStatus:** \\\`REQUESTED\\\` | \\\`UPCOMING\\\` | \\\`CHECKED_IN\\\` | \\\`IN_PROGRESS\\\` | \\\`COMPLETED\\\` | \\\`CANCELLED\\\` | \\\`NO_SHOW\\\`
+
+**AppointmentPaymentStatus:** \\\`PAID\\\` | \\\`UNPAID\\\`
+
+Payment status is tracked separately from appointment status. The previous \\\`NO_PAYMENT\\\` appointment status value has been removed in favour of the dedicated \\\`AppointmentPaymentStatus\\\` field.
+
+---
+
 ## Mobile Endpoints
 
 ### POST /mobile

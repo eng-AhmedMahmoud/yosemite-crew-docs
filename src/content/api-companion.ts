@@ -3,6 +3,14 @@ export const content = `
 
 Manages pet (companion) profiles including creation, retrieval, updates, profile pictures, and search functionality.
 
+## Companion Model
+
+Companions support standardized species and breed codes via FHIR extensions. The \\\`speciesCode\\\` and \\\`breedCode\\\` fields link to code system entries seeded from the breed catalogs (\\\`canine_breeds.json\\\`, \\\`feline_breeds.json\\\`, \\\`equine_breeds.json\\\`).
+
+**CompanionType:** \\\`dog\\\` | \\\`cat\\\` | \\\`horse\\\` | \\\`other\\\`
+
+---
+
 ## Mobile Endpoints
 
 ### POST /

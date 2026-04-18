@@ -8,7 +8,7 @@ Standards and conventions enforced across the Yosemite Crew monorepo. These rule
 | Tool | Version | Purpose |
 |------|---------|---------|
 | Node.js | 20.x+ | Runtime |
-| pnpm | 10.30+ | Package manager with workspaces |
+| pnpm | 8.15.6 | Package manager with workspaces |
 | Turborepo | 2.5+ | Monorepo build orchestration |
 | TypeScript | 5.x | Type safety across all apps |
 

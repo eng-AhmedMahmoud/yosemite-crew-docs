@@ -13,8 +13,8 @@ pnpm run dev --filter api
 ## Tech Stack
 
 - **Express 4.21** — HTTP framework
-- **PostgreSQL** — Primary database (via Prisma ORM)
-- **MongoDB 8.12** — Legacy database (migration in progress, via Mongoose)
+- **PostgreSQL (Prisma 5.22)** — Primary database; all new features target Postgres exclusively
+- **MongoDB 8.12** — Legacy database (migration in progress, via Mongoose). Optional for new development
 - **Redis / BullMQ 5.65** — Job queue and caching
 - **Socket.io 4.8** — Real-time WebSocket events
 - **Stripe 20.0** — Payment processing

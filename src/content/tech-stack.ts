@@ -7,7 +7,7 @@ export const content = `
 |-----------|---------|---------|
 | TypeScript | Type safety across all apps | 5.x |
 | Turborepo | Monorepo build orchestration | 2.5 |
-| pnpm | Package management with workspaces | 10.30+ |
+| pnpm | Package management with workspaces | 8.15.6 |
 
 ## Frontend (Web PMS)
 
@@ -23,7 +23,7 @@ export const content = `
 | Stripe React | Payment UI components | 5.4.1 |
 | Framer Motion | Animations | 12.18.1 |
 | Amazon Cognito | Authentication | 6.3.15 |
-| Axios | HTTP client | 1.13.x |
+| Axios | HTTP client | 1.12.0 |
 | React Hook Form | Form handling | — |
 | React Icons | Icon library | 5.3.0 |
 | Iconify | Additional icons | 6.0.0 |
@@ -35,7 +35,7 @@ export const content = `
 | Express | HTTP framework | 4.21.2 |
 | Node.js | Runtime (ESM modules) | 22 |
 | PostgreSQL | Primary database (via Prisma ORM) | — |
-| Prisma | Type-safe ORM for PostgreSQL | — |
+| Prisma | Type-safe ORM for PostgreSQL | 5.22.0 |
 | MongoDB | Legacy database (migration in progress) | 8.12.2 (driver) |
 | Mongoose | ODM for MongoDB (legacy) | — |
 | Redis / BullMQ | Job queue and caching | 5.65.1 |
@@ -50,7 +50,7 @@ export const content = `
 | Google Auth Library | Google OAuth authentication | 10.2.0 |
 | Express Rate Limit | API rate limiting middleware | 7.5.0 |
 | Express Mongo Sanitize | NoSQL injection prevention | 2.2.0 |
-| Playwright | Server-side browser automation | 1.57.0 |
+| Playwright | Server-side browser automation | 1.58.2 |
 | Winston | Structured logging | 3.17.0 |
 | Zod | Runtime validation | 3.24.2 |
 | Class Validator | DTO validation decorators | — |
